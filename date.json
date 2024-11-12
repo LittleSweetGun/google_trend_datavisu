@@ -1,0 +1,38 @@
+[
+    {
+      "date_code": "now 1-H",
+      "date_name": "Past hour"
+    },
+    {
+        "date_code": "now 4-H",
+        "date_name": "Past 4 hours"
+      },
+      {
+        "date_code": "now 1-d",
+        "date_name": "Past day"
+      },
+      {
+        "date_code": "now 7-d",
+        "date_name": "Past 7 days"
+      },
+      {
+        "date_code": "today 1-m",
+        "date_name": "Past month"
+      },
+      {
+        "date_code": "today 3-m",
+        "date_name": "Past 3 months"
+      },
+      {
+        "date_code": "today 12-m",
+        "date_name": "Past year"
+      },
+      {
+        "date_code": "today 5-y",
+        "date_name": "Past 5 years"
+      },
+      {
+        "date_code": "all",
+        "date_name": "From 2004 to now"
+      }
+]
