@@ -24,7 +24,7 @@ filtered_locations = {code: name for code, name in locations_data.items() if len
 geo_code = st.selectbox("Select Region:", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
 hours = st.selectbox("Select Time Range (in hours):", options=['4', '24', '48', '168'], index=3)
 language_code = "en"
-api_key = "b7744032f87d7c0a831939f9ce1b7f2402a47a9d03761ddcf577bfc5f3f290ac"
+api_key = "f089a7bd4f672ce32eafefe1f39e12b48dd15d288dcedd586ebf61ff234bfc70"
 
 # API endpoint with user-selected parameters
 api_url_now = f"https://serpapi.com/search?engine=google_trends_trending_now&hours={hours}&geo={geo_code}&hl={language_code}&api_key={api_key}"

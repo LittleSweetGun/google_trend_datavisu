@@ -25,7 +25,7 @@ with open("date.json") as f:
 date_options = {da['date_code']: da['date_name'] for da in date_data}
 
 #API parameters
-api_key = "b7744032f87d7c0a831939f9ce1b7f2402a47a9d03761ddcf577bfc5f3f290ac"
+api_key = "f089a7bd4f672ce32eafefe1f39e12b48dd15d288dcedd586ebf61ff234bfc70"
 
 engine = 'google_trends'
 geo_code = st.selectbox("Select Region:", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
@@ -42,7 +42,7 @@ if query:
     #Around the world
     api_url_country = f"https://serpapi.com/search.json?engine={engine}&q={query}&region=COUNTRY&hl=en&date={date_code}&data_type=GEO_MAP_0&api_key={api_key}"
     #Around a country
-    api_url_city = f"https://serpapi.com/search.json?engine={engine}&q={query}&geo={geo_code}&region=CITY&hl=en&date={date_code}&data_type=GEO_MAP_0&api_key={api_key}"
+    api_url_city = f"https://serpapi.com/search.json?engine={engine}&q={query}&geo=US&region=CITY&hl=en&date={date_code}&data_type=GEO_MAP_0&api_key={api_key}"
      
     # Make the GET request to the API
     response_time = requests.get(api_url_time)
@@ -82,10 +82,10 @@ if query:
             # Apply processing to the DataFrame
             processed_df_date = data_process(df_time)
         
-            with st.expander(":clock2: Your interest over time"):
+            with st.expander(":clock2: Your interest over time :clock2:"):
             # Visualization - Sunburst Chart of Trends
                 if 'date' in processed_df_date.columns and 'values' in processed_df_date.columns:
-                    fig = px.bar(processed_df_date, x='date', y='values', color='values', template='ggplot2', title="Your query over time in Bar View")
+                    fig = px.bar(processed_df_date, x='date', y='values', color='values', template='ggplot2')
                     st.plotly_chart(fig, use_container_width=True)
                 else:
                     st.warning("Insufficient data for creating a bar chart.")
@@ -117,10 +117,10 @@ if query:
             # Process data function
             df_country = pd.DataFrame(df_country['interest_by_region'][0])
             
-            with st.expander(":world_map: Your interest around the globe"):
+            with st.expander(":world_map: Your interest around the globe :world_map:"):
             # Visualization - Sunburst Chart of Trends
                 if 'location' in df_country.columns and 'value' in df_country.columns:
-                    fig = px.choropleth(df_country, locations='location', locationmode='country names', color='value', template='seaborn', hover_name='location', hover_data='value', title='Your query on the map')
+                    fig = px.choropleth(df_country, locations='location', locationmode='country names', color='value', template='seaborn', hover_name='location', hover_data='value')
                     st.plotly_chart(fig, use_container_width=True)
                 else:
                     st.warning("Insufficient data for creating a bar chart.")
@@ -150,25 +150,23 @@ if query:
         # Display the DataFrame
         if df_city is not None:
             # Process data function
-            df_city = pd.DataFrame(df_city['interest_over_time.timeline_data'][0])
+            df_city = pd.DataFrame(df_city['interest_by_region'][0])
             def data_process(data_df):
                 data_df = data_df.copy()
-                if 'values' in data_df.columns:
-                    data_df['values'] = data_df['values'].map(lambda x: int(x[0]['value']) if isinstance(x, list) and len(x) > 0 and 'value' in x[0] else None)
-                if 'timestamp' in data_df.columns:
-                    data_df['timestamp'] = data_df['timestamp'].map(lambda x: datetime.datetime.fromtimestamp(int(x)) if pd.notna(x) else x)
+                if 'coordinates' in data_df.columns:
+                    data_df['lat'] = data_df['coordinates'].map(lambda x: x['lat'])
+                    data_df['lng'] = data_df['coordinates'].map(lambda x: x['lng'])
                 return data_df
-
-            # Apply processing to the DataFrame
-            processed_df_date = data_process(df_time)
+            # Process the data
+            processed_df_city = data_process(df_city)
         
-            with st.expander(":flag-cp: Your interest around a country :flag-cn: "):
+            with st.expander(":flag-us: Your interest around the US :flag-us: "):
             # Visualization - Sunburst Chart of Trends
-                if 'date' in processed_df_date.columns and 'values' in processed_df_date.columns:
-                    fig = px.bar(processed_df_date, x='date', y='values', color='values', template='ggplot2', title="Your query over time in Bar View")
+                if 'lat' in processed_df_city.columns and 'lng' in processed_df_city.columns:
+                    fig = px.scatter_mapbox(processed_df_city, lat='lat', lon='lng', color='value',template='ggplot2',hover_name='location',zoom=0,mapbox_style="carto-positron")
                     st.plotly_chart(fig, use_container_width=True)
                 else:
-                    st.warning("Insufficient data for creating a bar chart.")
+                    st.warning("Insufficient data for creating a map.")
     else:
         # Error handling for unsuccessful API requests
         st.error(f"Failed to retrieve data from the API. Status code: {response_city.status_code}")
