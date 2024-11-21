@@ -74,6 +74,7 @@ if response_now.status_code == 200:
         #st.write("### Processed Data:")
         #st.dataframe(processed_df_now)
         
+        
         # Visualization - Sunburst Chart of Trends
         if 'query' in processed_df_now.columns and 'increase_percentage' in processed_df_now.columns and 'search_volume' in processed_df_now.columns:
             fig = px.sunburst(
@@ -87,6 +88,26 @@ if response_now.status_code == 200:
             st.plotly_chart(fig, use_container_width=True)
         else:
             st.warning("Insufficient data for creating a sunburst chart.")
+
+                # Top 5 Most Searched Queries - Histogram
+        if 'query' in processed_df_now.columns and 'search_volume' in processed_df_now.columns:
+            top_5_df = processed_df_now.nlargest(5, 'search_volume')[['query', 'search_volume']]
+            hist_fig = px.bar(
+                top_5_df,
+                x='query',
+                y='search_volume',
+                title="Top 5 Most Searched Queries",
+                color='search_volume',
+                template='seaborn'
+            )
+            hist_fig.update_layout(
+                xaxis=dict(showticklabels=True, title=None),
+                yaxis=dict(showticklabels=True, title=None),
+                showlegend=False
+            )
+            st.plotly_chart(hist_fig, use_container_width=True)
+        else:
+            st.warning("Insufficient data for creating a histogram.")
 else:
     # Error handling for unsuccessful API requests
     st.error(f"Failed to retrieve data from the API. Status code: {response_now.status_code}")
