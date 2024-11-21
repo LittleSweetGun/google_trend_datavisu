@@ -13,12 +13,6 @@ st.set_page_config(page_title="Google Trends - Your interest over time", layout=
 st.title(":clock2: Your interest over time")
 st.write("Ajouter texte explicatif")
 
-# Load language options from JSON file
-with open("languages.json") as f:
-    languages_data = json.load(f)
-# Creating a dictionary for language codes and names
-languages_options = {lang['language_code']: lang['language_name'] for lang in languages_data}
-
 # Load region options from JSON file
 with open("locations.json") as f:
     locations_data = json.load(f)
@@ -36,7 +30,7 @@ api_key = "b7744032f87d7c0a831939f9ce1b7f2402a47a9d03761ddcf577bfc5f3f290ac"
 engine = 'google_trends'
 geo_code = st.selectbox("Select Region:", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
 date_code = st.selectbox("Select Time Range:", options=list(date_options.keys()), index=1, format_func=lambda x: date_options[x])
-language_code = st.selectbox("Select Language:", options=list(languages_options.keys()), index=1, format_func=lambda x: languages_options[x])
+language_code = "en"
 data_type = 'TIMESERIES' #Interest over time for unique or multiple query
 query = st.text_input('Your IOTD (Interest Of The Day)')
 st.write(':blue[It works for both single and multiple queries so feel free to experiment!]')

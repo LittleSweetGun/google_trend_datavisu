@@ -18,18 +18,12 @@ with open("date.json") as f:
     date_data = json.load(f)
 # Creating a dictionary for language codes and names
 date_options = {da['date_code']: da['date_name'] for da in date_data}
-
-with open("languages.json") as f:
-    languages_data = json.load(f)
-# Creating a dictionary for language codes and names
-languages_options = {lang['language_code']: lang['language_name'] for lang in languages_data}
-
                    
 #Search parameters by country
 api_key = "b7744032f87d7c0a831939f9ce1b7f2402a47a9d03761ddcf577bfc5f3f290ac"
 
 engine = 'google_trends'
-language_code = st.selectbox("Select Language:", options=list(languages_options.keys()), index=1, format_func=lambda x: languages_options[x])
+language_code = "en"
 region = 'COUNTRY'
 date_code = st.selectbox("Select Time Range:", options=list(date_options.keys()), index=1, format_func=lambda x: date_options[x])
 data_type = 'GEO_MAP_0'

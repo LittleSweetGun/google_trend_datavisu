@@ -14,12 +14,6 @@ st.set_page_config(page_title="Google Trends - Trending Now", layout="wide")
 st.title(":cheese_wedge: What's Trending Now")
 st.write("Explore the latest trending searches by customizing your region, time range, and language preferences.")
 
-# Load language options from JSON file
-with open("languages.json") as f:
-    languages_data = json.load(f)
-# Creating a dictionary for language codes and names
-languages_options = {lang['language_code']: lang['language_name'] for lang in languages_data}
-
 # Load region options from JSON file
 with open("locations.json") as f:
     locations_data = json.load(f)
@@ -29,7 +23,7 @@ filtered_locations = {code: name for code, name in locations_data.items() if len
 # User inputs for API parameters
 geo_code = st.selectbox("Select Region:", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
 hours = st.selectbox("Select Time Range (in hours):", options=['4', '24', '48', '168'], index=3)
-language_code = st.selectbox("Select Language:", options=list(languages_options.keys()), index=1, format_func=lambda x: languages_options[x])
+language_code = "en"
 api_key = "b7744032f87d7c0a831939f9ce1b7f2402a47a9d03761ddcf577bfc5f3f290ac"
 
 # API endpoint with user-selected parameters
