@@ -24,7 +24,7 @@ st.markdown("<h1 style='text-align: center; color: #4A90E2;'>✨ WhaT's Vibing T
 st.write("This web page is your ultimate __trend-spotting__ superpower, letting you track the evolution of your interests in real-time—because who doesn’t want to know where in the world (or even the US) people are vibing to the same thing you are? 😎")
 
 # Features Section
-with st.expander("🏗️ Features"):
+with st.expander("❓ Features"):
     st.write(":blue[**Interest Over Time**]") 
     st.write("You can input your Interest of the Day (IOTD) and see how it’s been trending over time. It’s like Google Trends, but with way more personality. Want to know if your new obsession is just a flash in the pan or the next big thing? We’ve got you covered with time-series data and forecasts 🔮")
 
