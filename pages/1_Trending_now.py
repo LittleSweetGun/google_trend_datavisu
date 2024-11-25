@@ -3,13 +3,17 @@ import requests
 import pandas as pd
 import json
 import plotly.express as px
-import os
 
-from dotenv import load_dotenv
 from module import data_process_now
 
-load_dotenv()  # Loads variables from .env file
-api_key = os.getenv("API_KEY") # Access the API key
+#API_KEY secret from .env for github
+#import os
+#from dotenv import load_dotenv
+#load_dotenv()  # Loads variables from .env file
+#api_key = os.getenv("API_KEY")
+
+#API_KEY secret on streamlit
+api_key = st.secrets["API_KEY"]
 
 
 #Google Trend Now

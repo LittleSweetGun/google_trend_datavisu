@@ -2,19 +2,21 @@ import streamlit as st
 import pandas as pd
 import json
 import plotly.express as px
-import os
 
-from dotenv import load_dotenv
 from prophet import Prophet
 
 from module import (fetch_data, data_process_city, data_process_time)
 
 
+#API_KEY secret from .env for github
+#import os
+#from dotenv import load_dotenv
+#load_dotenv()  # Loads variables from .env file
+#api_key = os.getenv("API_KEY")
 
-load_dotenv()  # Loads variables from .env file
-api_key = os.getenv("API_KEY")
+#API_KEY secret on streamlit
+api_key = st.secrets["API_KEY"]
 
-api_key = os.getenv("API_KEY") # Access the API key
 
 
 st.set_page_config(page_title="Google Trends - Your IOTD ✨", layout="wide")
