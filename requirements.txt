@@ -2,3 +2,4 @@ seaborn
 python-dotenv
 Prophet
 plotly.express
+streamlit
