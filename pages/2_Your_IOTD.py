@@ -9,20 +9,32 @@ from module import (fetch_data, data_process_city, data_process_time)
 
 
 #API_KEY secret from .env for github
-#import os
-#from dotenv import load_dotenv
-#load_dotenv()  # Loads variables from .env file
-#api_key = os.getenv("API_KEY")
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Loads variables from .env file
+api_key = os.getenv("API_KEY")
 
 #API_KEY secret on streamlit
-api_key = st.secrets["API_KEY"]
+#api_key = st.secrets["API_KEY"]
 
 
 
 st.set_page_config(page_title="Google Trends - Your IOTD ✨", layout="wide")
-st.title("✨ Your Interest Of The Day ✨")
-st.write("Ajouter texte explicatif")
+st.markdown("<h1 style='text-align: center; color: #4A90E2;'>✨ WhaT's Vibing Today ✨</h1>", unsafe_allow_html=True)
+st.write("This web page is your ultimate __trend-spotting__ superpower, letting you track the evolution of your interests in real-time—because who doesn’t want to know where in the world (or even the US) people are vibing to the same thing you are? 😎")
 
+# Features Section
+st.subheader("🏗️ Features")
+st.write(":blue[**Interest Over Time**]") 
+st.write("You can input your Interest of the Day (IOTD) and see how it’s been trending over time. It’s like Google Trends, but with way more personality. Want to know if your new obsession is just a flash in the pan or the next big thing? We’ve got you covered with time-series data and forecasts 🔮")
+
+st.write(":blue[**Global Interest:**]")
+st.write("See where your topic is blowing up around the world 🌍 Is it trending in France ? Maybe in Japan? A map shows the hotspots, so you can feel extra cool knowing exactly where people are Googling what you’re into 🌎✨")
+
+st.write(":blue[**US City Trends:**]")
+st.write("Curious where in the US people are losing their minds over the same thing? Check out city-level search data. You might be surprised to see which city is leading the pack—it could be your hometown, where you went on holidays or somewhere totally random! 🏙️🔥")
+
+st.subheader("🤿 Start diving!")
 #Load locations (countries) options from locations.json file
 with open("locations.json", encoding="utf-8") as f:
     locations_data = json.load(f)
@@ -38,11 +50,11 @@ date_options = {da['date_code']: da['date_name'] for da in date_data}
 #API parameters
 
 engine = 'google_trends'
-geo_code = st.selectbox("Select Region:", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
-date_code = st.selectbox("Select Time Range:", options=list(date_options.keys()), index=1, format_func=lambda x: date_options[x])
-st.write(':blue[**Feature** : Forecasts available for one and three months]')
-query = st.text_input('Your IOTD (Interest Of The Day)')
-st.write(':red[**Warning** :]:blue[ It only works for single queries]')
+geo_code = st.selectbox("🚀 :blue[**Where ?**]", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
+date_code = st.selectbox("⌛ :blue[**When ?**]", options=list(date_options.keys()), index=1, format_func=lambda x: date_options[x])
+st.write(':gray[**Feature** : Forecasts available for one and three months]')
+query = st.text_input('🔥 :blue[**Your IOTD (Interest Of The Day)**]')
+st.write('🚨 :gray[ It only works for single queries!!]')
 
 #Only display if query is not empty (after enter)
 if query:

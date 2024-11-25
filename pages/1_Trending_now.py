@@ -7,13 +7,13 @@ import plotly.express as px
 from module import data_process_now
 
 #API_KEY secret from .env for github
-#import os
-#from dotenv import load_dotenv
-#load_dotenv()  # Loads variables from .env file
-#api_key = os.getenv("API_KEY")
+import os
+from dotenv import load_dotenv
+load_dotenv()  # Loads variables from .env file
+api_key = os.getenv("API_KEY")
 
 #API_KEY secret on streamlit
-api_key = st.secrets["API_KEY"]
+#api_key = st.secrets["API_KEY"]
 
 
 #Google Trend Now
@@ -22,7 +22,7 @@ st.set_page_config(page_title="Google Trends - Trending Now", layout="wide")
 
 # Title and description
 st.title(":cheese_wedge: What's Trending Now")
-st.write("Explore the latest trending searches by customizing your region, time range, and language preferences.")
+st.write("Explore the latest trending searches by customizing your country and time range preferences. Let's dive into the current buzz! :v:")
 
 # Load region options from JSON file
 with open("locations.json") as f:
@@ -31,8 +31,8 @@ with open("locations.json") as f:
 filtered_locations = {code: name for code, name in locations_data.items() if len(code) <= 2}
 
 # User inputs for API parameters
-geo_code = st.selectbox("Select Region:", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
-hours = st.selectbox("Select Time Range (in hours):", options=['4', '24', '48', '168'], index=3)
+geo_code = st.selectbox("🚀 :blue[**Where ?**]", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
+hours = st.selectbox("⌛ :blue[**When ?**]", options=['4', '24', '48', '168'], index=3)
 language_code = "en"
 
 # API endpoint with user-selected parameters
