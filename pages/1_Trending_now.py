@@ -7,13 +7,13 @@ import plotly.express as px
 from module import data_process_now
 
 #API_KEY secret from .env for github
-import os
-from dotenv import load_dotenv
-load_dotenv()  # Loads variables from .env file
-api_key = os.getenv("API_KEY")
+#import os
+#from dotenv import load_dotenv
+#load_dotenv()  # Loads variables from .env file
+#api_key = os.getenv("API_KEY")
 
 #API_KEY secret on streamlit
-#api_key = st.secrets["API_KEY"]
+api_key = st.secrets["API_KEY"]
 
 
 #Google Trend Now
