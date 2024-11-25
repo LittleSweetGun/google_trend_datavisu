@@ -88,7 +88,6 @@ if query:
                     combined_df = pd.merge(processed_df_date, forecast_filtered, on='ds', how='outer')
 
                     # Visualization: Actual and Forecast Combined
-                    st.subheader("Actual vs Forecasted Trends")
                     fig_combined = px.line(combined_df, x='ds', y='y', title=f"Actual and Forecasted Trends for '{query}'")
                     fig_combined.add_scatter(x=combined_df['ds'], y=combined_df['yhat'], mode='lines', name='Forecast')
                     fig_combined.add_scatter(x=combined_df['ds'], y=combined_df['yhat_lower'], mode='lines', name='Lower Bound', line=dict(dash='dot'))
