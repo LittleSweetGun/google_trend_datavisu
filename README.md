@@ -11,7 +11,7 @@ This application provides a user-friendly platform to explore search trends from
 1. **Trending Now**  
    Access real-time trending searches worldwide or within a specific region.
 2. **Trend Around the US**  
-   Explore search trends across major US cities to understand regional interest patterns.
+   Explore search trends across major US cities to understand regional interest patterns (this part is not always working).
 3. **Trend Around the world**  
    View how topics are trending globally with interactive heatmaps and geographic visualizations.
 4. **Interest Over Time**  
