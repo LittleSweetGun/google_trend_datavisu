@@ -29,7 +29,7 @@ This application provides a user-friendly platform to explore search trends from
 
 - **Past month, Past 3 months** : A "perfect" model that has both seasonal and trend characteristics, so we choose these two period to show future trends.
 
-- **Past year, Past 5 years,From 2004 to now** : Strong trend but not strong seasonality.
+- **Past year, Past 5 years,From 2004 to now** : Strong trend but no strong seasonality.
 
 ### 📊 Data Visualization Tools
 
