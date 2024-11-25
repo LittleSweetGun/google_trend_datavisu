@@ -16,9 +16,10 @@ This application provides a user-friendly platform to explore search trends from
    View how topics are trending globally with interactive heatmaps and geographic visualizations.
 4. **Interest Over Time**  
    Analyze how a specific topic's popularity has evolved, with time-series data and trend forecasts.
+
    #### Explanation of Forecast charts
 
-While trying to implement a forecast feature in the "Your query over time" visualization part, we observe that only predictions for the past month and the past three months were actually working.
+   While trying to implement a forecast feature in the "Your query over time" visualization part, we observe that only predictions for the past month and the past three months were actually working.
 
 - **Prediction method** : The prediction method used here is Prophet by Facebook. This method provides a more robust, adaptive alternative to LES by fitting models with trend and seasonality using Bayesian techniques and extends beyond Holt-Winters by supporting multiple seasonalities, holidays and other custom events in the model. Also, Prophet can handle missing data, outliers and custom seasonalities, which the other methods (especially LES and Holt-Winters) struggle with.
 
