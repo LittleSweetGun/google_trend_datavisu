@@ -24,15 +24,15 @@ st.markdown("<h1 style='text-align: center; color: #4A90E2;'>✨ WhaT's Vibing T
 st.write("This web page is your ultimate __trend-spotting__ superpower, letting you track the evolution of your interests in real-time—because who doesn’t want to know where in the world (or even the US) people are vibing to the same thing you are? 😎")
 
 # Features Section
-st.subheader("🏗️ Features")
-st.write(":blue[**Interest Over Time**]") 
-st.write("You can input your Interest of the Day (IOTD) and see how it’s been trending over time. It’s like Google Trends, but with way more personality. Want to know if your new obsession is just a flash in the pan or the next big thing? We’ve got you covered with time-series data and forecasts 🔮")
+with st.expander("🏗️ Features"):
+    st.write(":blue[**Interest Over Time**]") 
+    st.write("You can input your Interest of the Day (IOTD) and see how it’s been trending over time. It’s like Google Trends, but with way more personality. Want to know if your new obsession is just a flash in the pan or the next big thing? We’ve got you covered with time-series data and forecasts 🔮")
 
-st.write(":blue[**Global Interest:**]")
-st.write("See where your topic is blowing up around the world 🌍 Is it trending in France ? Maybe in Japan? A map shows the hotspots, so you can feel extra cool knowing exactly where people are Googling what you’re into 🌎✨")
+    st.write(":blue[**Global Interest:**]")
+    st.write("See where your topic is blowing up around the world 🌍 Is it trending in France ? Maybe in Japan? A map shows the hotspots, so you can feel extra cool knowing exactly where people are Googling what you’re into 🌎✨")
 
-st.write(":blue[**US City Trends:**]")
-st.write("Curious where in the US people are losing their minds over the same thing? Check out city-level search data. You might be surprised to see which city is leading the pack—it could be your hometown, where you went on holidays or somewhere totally random! 🏙️🔥")
+    st.write(":blue[**US City Trends:**]")
+    st.write("Curious where in the US people are losing their minds over the same thing? Check out city-level search data. You might be surprised to see which city is leading the pack—it could be your hometown, where you went on holidays or somewhere totally random! 🏙️🔥")
 
 st.subheader("🤿 Start diving!")
 #Load locations (countries) options from locations.json file
