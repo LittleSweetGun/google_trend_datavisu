@@ -10,7 +10,7 @@ st.write("Here, we break down data like never before! Giving you the latest tren
 
 
 st.write("### 💻 Explore Popular Search Trends")
-st.write("Ready to dive deep? 🤿 This app is here to give you the **data power** to explore trending topics worldwide—from cities to countries to trends over time. No matter if you're a trendsetter, a researcher or just curious, this tool is your new best friend for understanding **WhaT**'s popping and when 🔍")
+st.write("Ready to dive deep? 🤿 This app is here to give you the **data power** to explore trending topics worldwide — from cities to countries to trends over time -. No matter if you're a trendsetter, a researcher or just curious, this tool is your new best friend for understanding **WhaT**'s popping and when 🔍")
 
 
 st.write("### 📊 What’s Inside the Vault of Features?")

@@ -32,7 +32,7 @@ filtered_locations = {code: name for code, name in locations_data.items() if len
 
 # User inputs for API parameters
 geo_code = st.selectbox("🚀 :blue[**Where ?**]", options=list(filtered_locations.keys()), index=0, format_func=lambda x: filtered_locations[x])
-hours = st.selectbox("⌛ :blue[**When ?**]", options=['4', '24', '48', '168'], index=3)
+hours = st.selectbox("⌛ :blue[**When ?** (in hours)]", options=['4', '24', '48', '168'], index=3)
 language_code = "en"
 
 # API endpoint with user-selected parameters
