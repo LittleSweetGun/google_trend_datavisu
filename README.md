@@ -31,7 +31,7 @@ This application provides a user-friendly platform to explore search trends from
 
 - **Past year, Past 5 years,From 2004 to now** : Strong trend but no strong seasonality.
 
-### 📊 Data Visualization Tools
+### Data Visualization Tools
 
 - **Interactive Sunburst Charts** to explore trends by hierarchy.
 - **Bar Charts** for identifying top queries.
