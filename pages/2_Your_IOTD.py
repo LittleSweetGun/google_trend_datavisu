@@ -4,13 +4,11 @@ import json
 import plotly.express as px
 import os
 
-from dotenv import load_dotenv
 from prophet import Prophet
 
 from module import (fetch_data, data_process_city, data_process_time)
 
-load_dotenv()  # Load environment variables from .env file
-api_key = os.getenv("API_KEY")  # Access the API key
+api_key = os.getenv("API_KEY") # Access the API key
 
 
 st.set_page_config(page_title="Google Trends - Your IOTD ✨", layout="wide")

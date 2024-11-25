@@ -5,11 +5,9 @@ import json
 import plotly.express as px
 import os
 
-from dotenv import load_dotenv
 from module import data_process_now
 
-load_dotenv()  #Load env variables from .env (secret for github's repository)
-api_key =  "f089a7bd4f672ce32eafefe1f39e12b48dd15d288dcedd586ebf61ff234bfc70"  # Access the API key
+api_key = os.getenv("API_KEY") # Access the API key
 
 
 #Google Trend Now
