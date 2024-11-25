@@ -3,14 +3,14 @@ import pandas as pd
 import json
 import plotly.express as px
 import os
+
 from dotenv import load_dotenv
-
-load_dotenv()  # Load environment variables from .env file
-
-api_key = os.getenv("API_KEY")  # Access the API key
-
+from prophet import Prophet
 
 from module import (fetch_data, data_process_city, data_process_time)
+
+load_dotenv()  # Load environment variables from .env file
+api_key = os.getenv("API_KEY")  # Access the API key
 
 
 st.set_page_config(page_title="Google Trends - Your IOTD ✨", layout="wide")
@@ -49,6 +49,7 @@ if query:
     #Around a country
     api_url_city = f"https://serpapi.com/search.json?engine={engine}&q={query}&geo=US&region=CITY&hl=en&date={date_code}&data_type=GEO_MAP_0&api_key={api_key}"
     
+    #Fetch data
     df_time = fetch_data(api_url_time)
     df_country = fetch_data(api_url_country)
     df_city = fetch_data(api_url_city)
@@ -62,11 +63,33 @@ if query:
         
         with st.expander(":clock2: Your interest over time :clock2:"):
         #Visualization
-            if 'date' in processed_df_date.columns and 'values' in processed_df_date.columns:
-                fig = px.bar(processed_df_date, x='date', y='values', color='values', template='ggplot2')
-                st.plotly_chart(fig, use_container_width=True)
+            if 'ds' in processed_df_date.columns and 'y' in processed_df_date.columns:
+                fig_actual = px.line(processed_df_date, x='ds', y='y', template='seaborn', title=f"Search Trends for '{query}'")
+                st.plotly_chart(fig_actual, use_container_width=True)
+
+                # Only perform forecasting if time range is "past 3 months" or "past month"
+                if date_code in ['today 1-m', 'today 3-m']:
+                # Forecasting with Prophet
+                    model = Prophet()
+                    model.fit(processed_df_date)
+
+                    # Predict future data
+                    future = model.make_future_dataframe(periods=30)  # Predict the next 30 days
+                    forecast = model.predict(future)
+
+                    # Combine actual and forecasted data for visualization
+                    forecast_filtered = forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
+                    combined_df = pd.merge(processed_df_date, forecast_filtered, on='ds', how='outer')
+
+                    # Visualization: Actual and Forecast Combined
+                    st.subheader("Actual vs Forecasted Trends")
+                    fig_combined = px.line(combined_df, x='ds', y='y', title=f"Actual and Forecasted Trends for '{query}'")
+                    fig_combined.add_scatter(x=combined_df['ds'], y=combined_df['yhat'], mode='lines', name='Forecast')
+                    fig_combined.add_scatter(x=combined_df['ds'], y=combined_df['yhat_lower'], mode='lines', name='Lower Bound', line=dict(dash='dot'))
+                    fig_combined.add_scatter(x=combined_df['ds'], y=combined_df['yhat_upper'], mode='lines', name='Upper Bound', line=dict(dash='dot'))
+                    st.plotly_chart(fig_combined, use_container_width=True)
             else:
-                st.warning("Insufficient data for creating a bar chart.")
+                st.warning("Insufficient data for creating a line chart.")
     else:
         st.warning("The data is not available.")
     

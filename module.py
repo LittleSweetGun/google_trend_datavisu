@@ -30,6 +30,14 @@ def fetch_data(url):
         st.error(f"Failed to retrieve data from the API. Status code: {response.status_code}")
         st.write("Response text:", response.text)
 
+def data_process_now(data_df):
+    data_df = data_df.copy()
+    if 'start_timestamp' in data_df.columns:
+        data_df['start_timestamp'] = data_df['start_timestamp'].map(lambda x: datetime.datetime.fromtimestamp(x) if pd.notna(x) else x)
+    if 'end_timestamp' in data_df.columns:
+        data_df['end_timestamp'] = data_df['end_timestamp'].map(lambda x: datetime.datetime.fromtimestamp(x) if pd.notna(x) else x)
+    return data_df
+    
 def data_process_city(data_df):
     data_df = data_df.copy()
     if 'coordinates' in data_df.columns:
@@ -43,4 +51,5 @@ def data_process_time(data_df):
         data_df['values'] = data_df['values'].map(lambda x: int(x[0]['value']) if isinstance(x, list) and len(x) > 0 and 'value' in x[0] else None)
     if 'timestamp' in data_df.columns:
         data_df['timestamp'] = data_df['timestamp'].map(lambda x: datetime.datetime.fromtimestamp(int(x)) if pd.notna(x) else x)
+    data_df.rename(columns={'timestamp': 'ds', 'values': 'y'}, inplace=True)
     return data_df
