@@ -5,8 +5,10 @@ import json
 import plotly.express as px
 import os
 
+from dotenv import load_dotenv
 from module import data_process_now
 
+load_dotenv()  # Loads variables from .env file
 api_key = os.getenv("API_KEY") # Access the API key
 
 

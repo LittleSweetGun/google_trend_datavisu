@@ -4,9 +4,15 @@ import json
 import plotly.express as px
 import os
 
+from dotenv import load_dotenv
 from prophet import Prophet
 
 from module import (fetch_data, data_process_city, data_process_time)
+
+
+
+load_dotenv()  # Loads variables from .env file
+api_key = os.getenv("API_KEY")
 
 api_key = os.getenv("API_KEY") # Access the API key
 
