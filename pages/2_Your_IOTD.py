@@ -125,7 +125,7 @@ if query:
     else:
         st.warning("The data is not available.")
 
-    #Around the US
+    #Around the US (not working everytime > didn't find why)
     if df_city is not None and 'interest_by_region' in df_city.columns:
         #Process data function (retrieve latitude and longitude in coordinates column)
         df_city = pd.DataFrame(df_city['interest_by_region'][0])
